@@ -19,11 +19,6 @@ A role for managing the fqdn/hostname.
 | `fqdn_full` | Fully qualified domain name | `inventory_hostname` |
 | `fqdn_short` | Short hostname | `inventory_hostname_short` |
 
-#### Attention:
-All boolean values can be used with either `'yes'`/`'no'` or `true`/`false`.
-This allows you to alter their value from the command line (`-e "bool=yes"`)
-without problems.
-
 ## Dependencies
 
 None.
