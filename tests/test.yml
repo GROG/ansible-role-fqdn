@@ -1,5 +1,8 @@
 ---
 - hosts: localhost
   remote_user: root
+  vars:
+    fqdn_full: myhost.example.net
+    fqdn_short: myhost
   roles:
     - ansible-role-fqdn
