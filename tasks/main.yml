@@ -1,0 +1,40 @@
+---
+
+- name: Update sysconfig on Redhat
+  lineinfile:
+    dest: /etc/sysconfig/network
+    line: "HOSTNAME={{ fqdn_full }}"
+    regexp: 'HOSTNAME='
+  when: ansible_distribution in [ 'RedHat', 'CentOS' ]
+
+- name: Set Hostname with hostname command
+  hostname:
+    name: "{{ fqdn_short }}"
+
+- name: Re-gather facts
+  action: setup
+  when: ansible_hostname != fqdn_full
+
+- name: Add entry to /etc/hosts (ipv4)
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ ansible_default_ipv4.address }} {{ fqdn_full }} {{ fqdn_short }}"
+    regex: "^{{ ansible_default_ipv4.address }}"
+    state: present
+    backup: yes
+  when: ansible_default_ipv4.address is defined
+
+- name: Add entry to /etc/hosts (ipv6)
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ ansible_default_ipv6.address }} {{ fqdn_full }} {{ fqdn_short }}"
+    regex: "^{{ ansible_default_ipv6.address }}"
+    state: present
+    backup: yes
+  when: ansible_default_ipv6.address is defined
+
+- name: restart hostname
+  service:
+    name: hostname
+    state: restarted
+  when: ansible_distribution not in [ 'RedHat', 'CentOS' ]

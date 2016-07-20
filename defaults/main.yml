@@ -1,0 +1,3 @@
+---
+fqdn_full: "{{ inventory_hostname }}"
+fqdn_short: "{{ inventory_hostname_short }}"
