@@ -1,0 +1,7 @@
+---
+
+- name: Restart hostname
+  service:
+    name: hostname
+    state: restarted
+  when: ansible_distribution not in [ 'RedHat', 'CentOS' ]
