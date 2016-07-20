@@ -7,11 +7,9 @@
     regexp: 'HOSTNAME='
   when: ansible_distribution in [ 'RedHat', 'CentOS' ]
 
-- name: Set Hostname with hostname command
+- name: Set Hostname
   hostname:
     name: "{{ fqdn_short }}"
-  notify:
-    - Restart hostname
 
 - name: Re-gather facts
   action: setup
@@ -25,6 +23,14 @@
     state: present
     backup: yes
   when: ansible_default_ipv4.address is defined
+
+- name: Add loopback entry to /etc/hosts (ipv4)
+  lineinfile:
+    dest: /etc/hosts
+    line: "127.0.1.1 {{ fqdn_full }} {{ fqdn_short }}"
+    regexp: "^127.0.1.1"
+    state: present
+    backup: yes
 
 - name: Add entry to /etc/hosts (ipv6)
   lineinfile:
