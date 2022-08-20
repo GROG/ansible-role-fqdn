@@ -10,6 +10,7 @@
 - name: Set Hostname
   hostname:
     name: "{{ fqdn_short }}"
+    use: "{{ fqdn_update_strategy }}"
 
 - name: Re-gather facts
   action: setup
