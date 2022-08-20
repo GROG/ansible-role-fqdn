@@ -18,6 +18,7 @@ A role for managing the fqdn/hostname.
 |----------|-------------|---------------|
 | `fqdn_full` | Fully qualified domain name | `inventory_hostname` |
 | `fqdn_short` | Short hostname | `inventory_hostname_short` |
+| `fqdn_update_strategy` | Ansible hostname update strategy | `systemd` |
 
 ## Dependencies
 
