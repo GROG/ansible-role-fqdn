@@ -2,6 +2,6 @@
 fqdn_full: "{{ inventory_hostname }}"
 fqdn_short: "{{ inventory_hostname_short }}"
 
-# Set a hostname specifying strategy 
+# Ansible Hostname module option to set specific update strategy
 #  https://docs.ansible.com/ansible/latest/collections/ansible/builtin/hostname_module.html
 fqdn_update_strategy: "systemd"
